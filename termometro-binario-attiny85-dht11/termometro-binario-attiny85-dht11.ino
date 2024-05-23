@@ -1,3 +1,6 @@
+#include <DHT.h>
+#include <DHT_U.h>
+
 // Example testing sketch for various DHT humidity/temperature sensors
 // Written by ladyada, public domain
 
@@ -8,7 +11,7 @@
 #include "DHT.h"
 
 
-#define DHTPIN 1     // Digital pin connected to the DHT sensor
+#define DHTPIN 7     // Digital pin connected to the DHT sensor
 // Feather HUZZAH ESP8266 note: use pins 3, 4, 5, 12, 13 or 14 --
 // Pin 15 can work but DHT must be disconnected during program upload.
 
@@ -49,6 +52,7 @@ DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
   dht.begin();
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -63,7 +67,7 @@ void loop() {
 
     for (int i = 0; i < 6; i++) {
 
-      bitsresultados[i] = int(bitRead(int(round(t)), i));
+      bitsresultados[i] = bitRead(int(round(t)), i);
       
     }
 
@@ -137,12 +141,19 @@ void loop() {
 
     // Reading temperature or humidity takes about 250 milliseconds!
     // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
-    h = dht.readHumidity();
+    //h = dht.readHumidity();
     // Read temperature as Celsius (the default)
     t = dht.readTemperature();
     // Read temperature as Fahrenheit (isFahrenheit = true)
-    f = dht.readTemperature(true);
+    //f = dht.readTemperature(true);
 
+    for (int j = 0; j < 6; j++) {
+
+      Serial.print(bitsresultados[j]);
+      
+      
+    }
+    Serial.println(t);
    /* // Check if any reads failed and exit early (to try again).
     if (isnan(h) || isnan(t) || isnan(f)) {
       Serial.println(F("Failed to read from DHT sensor!"));

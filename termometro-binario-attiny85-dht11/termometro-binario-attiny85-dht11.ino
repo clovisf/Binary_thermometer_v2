@@ -11,7 +11,7 @@
 #include "DHT.h"
 
 
-#define DHTPIN 7     // Digital pin connected to the DHT sensor
+#define DHTPIN 1     // Digital pin connected to the DHT sensor
 // Feather HUZZAH ESP8266 note: use pins 3, 4, 5, 12, 13 or 14 --
 // Pin 15 can work but DHT must be disconnected during program upload.
 
@@ -21,6 +21,7 @@
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 
 int bitsresultados[6];
+int passagem= 0;
 
 // Variables used on this code
 unsigned long time1;
@@ -61,7 +62,7 @@ void loop() {
   time2 = micros();
   if (enterFunction == true) {
     previousTime = time1;
-    
+    passagem++;
     // Start your code below
     //-----------------------
 
@@ -71,7 +72,7 @@ void loop() {
       
     }
 
-    if (digitoaentrar == 1) {
+    if (digitoaentrar == 1 && passagem == 1) {
       if (bitsresultados[0] == 1) {
         pinMode(2, OUTPUT);
         pinMode(3, OUTPUT);
@@ -81,7 +82,7 @@ void loop() {
       }
       digitoaentrar = 2;
     }
-    if (digitoaentrar == 2) {
+    if (digitoaentrar == 2 && passagem == 2) {
       if (bitsresultados[1] == 1) {
         pinMode(2, OUTPUT);
         pinMode(3, OUTPUT);
@@ -91,7 +92,7 @@ void loop() {
       }
       digitoaentrar = 3;
     }
-    if (digitoaentrar == 3) {
+    if (digitoaentrar == 3 && passagem == 3) {
       if (bitsresultados[2] == 1) {
         pinMode(2, INPUT);
         pinMode(3, OUTPUT);
@@ -101,7 +102,7 @@ void loop() {
       }
       digitoaentrar = 4;
     }
-    if (digitoaentrar == 4) {
+    if (digitoaentrar == 4 && passagem == 4) {
       if (bitsresultados[3] == 1) {
         pinMode(2, INPUT);
         pinMode(3, OUTPUT);
@@ -111,7 +112,7 @@ void loop() {
       }
       digitoaentrar = 5;
     }
-    if (digitoaentrar == 5) {
+    if (digitoaentrar == 5 && passagem == 5) {
       if (bitsresultados[4] == 1) {
         pinMode(2, OUTPUT);
         pinMode(3, INPUT);
@@ -121,7 +122,7 @@ void loop() {
       }
       digitoaentrar = 6;
     }
-    if (digitoaentrar == 6) {
+    if (digitoaentrar == 6 && passagem == 6) {
       if (bitsresultados[5] == 1) {
         pinMode(2, OUTPUT);
         pinMode(3, INPUT);
@@ -130,6 +131,7 @@ void loop() {
         digitalWrite(4, HIGH);
       }
       digitoaentrar= 1;
+      passagem= 0;
     }
 
     //-----------------------
@@ -147,13 +149,7 @@ void loop() {
     // Read temperature as Fahrenheit (isFahrenheit = true)
     //f = dht.readTemperature(true);
 
-    for (int j = 0; j < 6; j++) {
-
-      Serial.print(bitsresultados[j]);
-      
-      
-    }
-    Serial.println(t);
+    
    /* // Check if any reads failed and exit early (to try again).
     if (isnan(h) || isnan(t) || isnan(f)) {
       Serial.println(F("Failed to read from DHT sensor!"));
@@ -170,7 +166,7 @@ void loop() {
 
 
   // The DELAY time is adjusted in the constant below >>
-  if (time1 - previousTime < 29990) { // 1 million microsencods= 1 second delay
+  if (time1 - previousTime < 990) { // 1 million microsencods= 1 second delay
     /* I have actually used 0.999990 seconds, in a trial to compensate the time that
        this IF function takes to be executed. this is really a point that
        need improvement in my code */

@@ -66,6 +66,7 @@ void loop() {
     // Start your code below
     //-----------------------
 
+    
     for (int i = 0; i < 6; i++) {
 
       bitsresultados[i] = bitRead(int(round(t)), i);
@@ -160,7 +161,7 @@ void loop() {
     float hif = dht.computeHeatIndex(f, h);
     // Compute heat index in Celsius (isFahreheit = false)
     float hic = dht.computeHeatIndex(t, h, false);*/
-
+    
 
   }
 
@@ -175,7 +176,7 @@ void loop() {
   else {
     enterFunction = true;
   }
-  if (time2 - previousTime2 < 2999990) { // 1 million microsencods= 1 second delay
+  if (time2 - previousTime2 < 999990) { // 1 million microsencods= 1 second delay
     /* I have actually used 0.999990 seconds, in a trial to compensate the time that
        this IF function takes to be executed. this is really a point that
        need improvement in my code */

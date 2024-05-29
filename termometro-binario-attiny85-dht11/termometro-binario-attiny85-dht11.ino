@@ -53,7 +53,7 @@ DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
   dht.begin();
-  Serial.begin(9600);
+  //Serial.begin(9600);
 }
 
 void loop() {
@@ -67,12 +67,6 @@ void loop() {
     //-----------------------
 
     
-    for (int i = 0; i < 6; i++) {
-
-      bitsresultados[i] = bitRead(int(round(t)), i);
-      
-    }
-
     if (digitoaentrar == 1 && passagem == 1) {
       if (bitsresultados[0] == 1) {
         pinMode(2, OUTPUT);
@@ -150,7 +144,13 @@ void loop() {
     // Read temperature as Fahrenheit (isFahrenheit = true)
     //f = dht.readTemperature(true);
 
-    
+    for (int i = 0; i < 6; i++) {
+
+      bitsresultados[i] = bitRead(int(round(t)), i); //This is where the magic happens, I get the "t" value (temperature),
+      // round it, convert it to int and extract every bit of its binary equivalent. The bits are then used to enter
+      // each charlieplexed LED bit
+      
+    }
    /* // Check if any reads failed and exit early (to try again).
     if (isnan(h) || isnan(t) || isnan(f)) {
       Serial.println(F("Failed to read from DHT sensor!"));
@@ -176,7 +176,7 @@ void loop() {
   else {
     enterFunction = true;
   }
-  if (time2 - previousTime2 < 999990) { // 1 million microsencods= 1 second delay
+  if (time2 - previousTime2 < 4999990) { // 1 million microsencods= 1 second delay
     /* I have actually used 0.999990 seconds, in a trial to compensate the time that
        this IF function takes to be executed. this is really a point that
        need improvement in my code */

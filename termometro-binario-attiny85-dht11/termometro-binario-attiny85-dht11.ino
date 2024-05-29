@@ -68,7 +68,7 @@ void loop() {
 
     
     if (digitoaentrar == 1 && passagem == 1) {
-      if (bitsresultados[0] == 1) {
+      if (bitsresultados[5] == 1) {
         pinMode(2, OUTPUT);
         pinMode(3, OUTPUT);
         pinMode(4, INPUT);
@@ -78,7 +78,7 @@ void loop() {
       digitoaentrar = 2;
     }
     if (digitoaentrar == 2 && passagem == 2) {
-      if (bitsresultados[1] == 1) {
+      if (bitsresultados[4] == 1) {
         pinMode(2, OUTPUT);
         pinMode(3, OUTPUT);
         pinMode(4, INPUT);
@@ -88,7 +88,7 @@ void loop() {
       digitoaentrar = 3;
     }
     if (digitoaentrar == 3 && passagem == 3) {
-      if (bitsresultados[2] == 1) {
+      if (bitsresultados[3] == 1) {
         pinMode(2, INPUT);
         pinMode(3, OUTPUT);
         pinMode(4, OUTPUT);
@@ -98,7 +98,7 @@ void loop() {
       digitoaentrar = 4;
     }
     if (digitoaentrar == 4 && passagem == 4) {
-      if (bitsresultados[3] == 1) {
+      if (bitsresultados[2] == 1) {
         pinMode(2, INPUT);
         pinMode(3, OUTPUT);
         pinMode(4, OUTPUT);
@@ -108,7 +108,7 @@ void loop() {
       digitoaentrar = 5;
     }
     if (digitoaentrar == 5 && passagem == 5) {
-      if (bitsresultados[4] == 1) {
+      if (bitsresultados[1] == 1) {
         pinMode(2, OUTPUT);
         pinMode(3, INPUT);
         pinMode(4, OUTPUT);
@@ -118,7 +118,7 @@ void loop() {
       digitoaentrar = 6;
     }
     if (digitoaentrar == 6 && passagem == 6) {
-      if (bitsresultados[5] == 1) {
+      if (bitsresultados[0] == 1) {
         pinMode(2, OUTPUT);
         pinMode(3, INPUT);
         pinMode(4, OUTPUT);
@@ -140,15 +140,17 @@ void loop() {
     // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
     //h = dht.readHumidity();
     // Read temperature as Celsius (the default)
+    
     t = dht.readTemperature();
     // Read temperature as Fahrenheit (isFahrenheit = true)
     //f = dht.readTemperature(true);
 
     for (int i = 0; i < 6; i++) {
 
+
       bitsresultados[i] = bitRead(int(round(t)), i); //This is where the magic happens, I get the "t" value (temperature),
-      // round it, convert it to int and extract every bit of its binary equivalent. The bits are then used to enter
-      // each charlieplexed LED bit
+      // round it, convert it to integer and extract every bit of its binary equivalent. The bits are then used to enter
+      // each charlieplexed LED bit value
       
     }
    /* // Check if any reads failed and exit early (to try again).
